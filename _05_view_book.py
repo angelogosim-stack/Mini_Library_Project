@@ -1,7 +1,7 @@
 def view_books(self) -> list:
     return list(self.books.values())
 
-# usage in main python 
+# usage in main.py
 
 books = service.view_books()
 
