@@ -1,27 +1,20 @@
-def borrow_book():
+def borrow_book(self, book_id: str, member_id: str, loan_id: str) -> None:
 
-   print("\n--- BORROW BOOK ---")
+    if book_id not in self.books:
+        raise BookNotFoundError("Book not found.")
 
-   book_id = input("  Book ID  : ").strip()
-   member_id = input("  Member ID: ").strip()
+    if member_id not in self.members:
+        raise MemberNotFoundError("Member not found.")
 
-   book = service.books.get(book_id)
-   if book is None:
-       print("\n Book not found.")
-       return
+    book = self.books[book_id]
 
-   member = service.members.get(member_id)
-   if member is None:
-       print("\n Member not found.")
-       return
+    if not book.is_available:
+        raise BookUnavailableError("Book is already borrowed.")
 
-   if not book.available:
-       print("\n Book is already borrowed.")
-       return
+    member = self.members[member_id]
 
-   book.borrow()
-   loan = Loan(book, member)
-   service.loans.append(loan)
+    loan = Loan(loan_id, book, member)
 
-   print(f"\n  {member.name} borrowed {book.title}")
+    book.mark_as_borrowed()
 
+    self.loans.append(loan)
