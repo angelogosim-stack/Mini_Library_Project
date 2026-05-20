@@ -1,12 +1,15 @@
-def return_book():
+def return_book(self, book_id: str) -> bool:
 
-    print("\n----- RETURN BOOK -----")
+    if book_id not in self.books:
+        raise BookNotFoundError("Book not found.")
 
-    loan_id = input("  Loan ID: ").strip()
+    book = self.books[book_id]
 
-    try:
-        loan = service.return_book(loan_id)
-        print(f"\n  Book returned: {loan.book.title}")
-    except ValueError as e:
-        print(f"\n  Error: {e}")
+    for loan in self.loans:
 
+        if loan.book.book_id == book_id and loan.is_active:
+            loan.complete_return()
+            book.mark_as_returned()
+            return True
+
+    return False
