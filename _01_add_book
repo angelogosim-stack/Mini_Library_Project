@@ -1,0 +1,10 @@
+def add_book():
+
+    print("\n--- ADD BOOK ---")
+
+    book_id = input(" Book ID   : ").strip()
+    title = input(" Book Title : ").strip()
+    author = input(" Book Author: ").strip()
+
+    book = service.add_book(book_id, title, author)
+    print(f"\n  Book added: {book.title}")
