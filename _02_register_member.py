@@ -1,11 +1,2 @@
-def register_member():
-
-    print("\n----- REGISTER MEMBER -----")
-
-    member_id = input(" Member ID  : ").strip()
-    name = input(" Member Name : ").strip()
-    email = input(" Member Email: ").strip()
-
-    member = service.register_member(member_id, name, email)
-    print(f"\n  Member registered: {member.name}")
-
+def register_member(self, member_id: str, name: str, email: str) -> None:
+    self.members[member_id] = Member(member_id, name, email)
