@@ -1,14 +1,20 @@
-def view_members():
+def view_members(self) -> list:
+    return list(self.members.values())
 
-   print("\n----- VIEW MEMBERS -----")
 
-   members = service.view_members()
 
-   if not members:
-       print("\n No members found.")
-       return
+# usage in main.py 
 
-   print("\n Members:")
-   for member in members:
-       print(f"{member.member_id} - {member.name} ({member.email})") 
 
+members = service.view_members()
+
+if not members:
+    print("No members found.")
+
+else:
+    for member in members:
+
+        print(
+            f"[{member.member_id}] "
+            f"{member.name} ({member.email})"
+        )
